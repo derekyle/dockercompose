@@ -24,5 +24,4 @@ RUN apk --no-cache add \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version && \
-    gcloud components install kubectl && \
-    kubectl version
+    gcloud components install kubectl
