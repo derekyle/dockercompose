@@ -3,7 +3,7 @@ FROM docker:latest
 #install docker compose
 RUN (apk add --no-cache py-pip git && pip install docker-compose) || true
 
-#install gcloud sdk below
+#install gcloud sdk and kubectl component
 ARG CLOUD_SDK_VERSION=228.0.0
 ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
 
@@ -23,4 +23,6 @@ RUN apk --no-cache add \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
-    gcloud --version
+    gcloud --version && \
+    gcloud components install kubectl && \
+    kubectl version
