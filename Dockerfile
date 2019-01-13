@@ -4,7 +4,7 @@ FROM docker:latest
 RUN (apk add --no-cache py-pip git && pip install docker-compose) || true
 
 #install gcloud sdk and kubectl component
-ARG CLOUD_SDK_VERSION=228.0.0
+ARG CLOUD_SDK_VERSION=229.0.0
 ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
 
 ENV PATH /google-cloud-sdk/bin:$PATH
@@ -25,3 +25,11 @@ RUN apk --no-cache add \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version && \
     gcloud components install kubectl
+
+#install helm
+ARG HELM_VERSION="v2.12.1"
+ENV HELM_VERSION=$HELM_VERSION
+
+RUN apk add --no-cache ca-certificates \
+    && wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
+    && chmod +x /usr/local/bin/helm
