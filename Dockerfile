@@ -33,3 +33,7 @@ ENV HELM_VERSION=$HELM_VERSION
 RUN apk add --no-cache ca-certificates \
     && wget -q https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
     && chmod +x /usr/local/bin/helm
+
+#install composer
+RUN apk add --no-cache php php-curl php-openssl php-json php-phar php-dom && \
+       curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
