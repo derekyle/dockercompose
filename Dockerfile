@@ -35,5 +35,5 @@ RUN apk add --no-cache ca-certificates \
     && chmod +x /usr/local/bin/helm
     
 #install composer
-RUN apk add --no-cache php php-curl php-openssl php-json php-phar php-dom iconv && \
+RUN apk add --no-cache php php-curl php-openssl php-json php-phar php-dom php-iconv && \
         curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
