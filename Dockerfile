@@ -1,10 +1,12 @@
 FROM docker:latest
 
+ARG HELM_VERSION="v2.13.1"
+ARG CLOUD_SDK_VERSION=241.0.0
+
 #install docker compose
 RUN (apk add --no-cache py-pip git && pip install docker-compose) || true
 
 #install gcloud sdk and kubectl component
-ARG CLOUD_SDK_VERSION=229.0.0
 ENV CLOUD_SDK_VERSION=$CLOUD_SDK_VERSION
 
 ENV PATH /google-cloud-sdk/bin:$PATH
@@ -27,7 +29,6 @@ RUN apk --no-cache add \
     gcloud components install kubectl
 
 #install helm
-ARG HELM_VERSION="v2.12.1"
 ENV HELM_VERSION=$HELM_VERSION
 
 RUN apk add --no-cache ca-certificates \
